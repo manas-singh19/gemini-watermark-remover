@@ -1,9 +1,7 @@
 # ✨ Free Gemini & Veo 3 AI Watermark Remover
 
 <p align="center">
-  <a href="https://ishara-madu.github.io/gemini-watermark-remover/">
-    <img src="./assets/logo.webp" alt="Gemini Watermark Remover Logo" width="100" height="100" />
-  </a>
+  <img src="./assets/logo.webp" alt="Gemini Watermark Remover Logo" width="100" height="100" />
 </p>
 
 <p align="center">
@@ -12,17 +10,10 @@
 </p>
 
 <p align="center">
-  <a href="https://ishara-madu.github.io/gemini-watermark-remover/"><img src="https://img.shields.io/badge/🚀_Live_Demo-GitHub_Pages-6366f1?style=for-the-badge" alt="Live Demo" /></a>
-  <a href="https://github.com/ishara-madu/gemini-watermark-remover/stargazers"><img src="https://img.shields.io/github/stars/ishara-madu/gemini-watermark-remover?style=for-the-badge&color=eab308" alt="GitHub Stars" /></a>
-  <a href="https://buymeacoffee.com/ishara.madu"><img src="https://img.shields.io/badge/☕_Donate-Buy_Me_A_Coffee-f43f5e?style=for-the-badge" alt="Buy Me A Coffee" /></a>
+  <a href="https://github.com/manassingh"><img src="https://img.shields.io/badge/GitHub-manassingh-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+  <a href="https://linkedin.com/in/manassingh"><img src="https://img.shields.io/badge/LinkedIn-manassingh-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />
 </p>
-
----
-
-## 🌐 Live Website
-
-👉 **Try it online:** [https://ishara-madu.github.io/gemini-watermark-remover/](https://ishara-madu.github.io/gemini-watermark-remover/)
 
 ---
 
@@ -52,7 +43,7 @@ $$\text{Original} = \frac{\text{Watermarked} - (\text{Logo} \times \alpha)}{1 - 
 
 - **Frontend:** Pure Semantic HTML5, Modern Vanilla CSS (Custom Design System), JavaScript (ES6+)
 - **Processing:** HTML5 Canvas API, WebCodecs API, [MediaBunny](https://github.com/diffusion-studio/mediabunny) for high-performance in-browser video unblending and AVC/H.264 muxing
-- **Hosting:** GitHub Pages
+- **Hosting:** Any static host (GitHub Pages, Netlify, Vercel, Cloudflare Pages, …)
 
 ---
 
@@ -61,13 +52,10 @@ $$\text{Original} = \frac{\text{Watermarked} - (\text{Logo} \times \alpha)}{1 - 
 Run the project locally with any static web server:
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/ishara-madu/gemini-watermark-remover.git
-
-# 2. Navigate to project folder
+# 1. Navigate to the project folder
 cd gemini-watermark-remover
 
-# 3. Start a local server (using Python 3, Node, or VS Code Live Server)
+# 2. Start a local server (using Python 3, Node, or VS Code Live Server)
 # Option A: Python
 python3 -m http.server 8000
 
@@ -82,7 +70,6 @@ Open `http://localhost:8000` in your browser.
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
-Feel free to check the [issues page](https://github.com/ishara-madu/gemini-watermark-remover/issues).
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -92,16 +79,12 @@ Feel free to check the [issues page](https://github.com/ishara-madu/gemini-water
 
 ---
 
-## 💖 Support
-
-If you found this tool helpful, consider giving it a ⭐️ star on GitHub or supporting via:
-
-<a href="https://buymeacoffee.com/ishara.madu" target="_blank">
-  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" />
-</a>
-
----
-
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 👤 Author
+
+**Manas Singh** — [GitHub](https://github.com/manassingh) · [LinkedIn](https://linkedin.com/in/manassingh)

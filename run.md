@@ -85,9 +85,7 @@ lsof -ti:8000 || echo "port 8000 is free"
 - **Requirements:** only a browser + a static server. Verified with Python 3.14.4 and Node v24.15.0.
 - **Watermark masks are inlined** as base64 (`BG_48_BASE64` / `BG_96_BASE64` in `main.js`), so no
   mask files need to be fetched at runtime.
-- **Internet connection is needed** for the CDN dependencies: Google Fonts, Iconify, the Buy Me a
-  Coffee widget, and MediaBunny (loaded lazily, only when you process a **video**). Image watermark
+- **Internet connection is needed** for the CDN dependencies: Google Fonts, Iconify, and MediaBunny (loaded lazily, only when you process a **video**). Image watermark
   removal works fully offline.
 - **Video export requires WebCodecs** — use Chrome/Edge (or a recent Safari). Firefox support is limited.
 - **Deployment:** GitHub Pages serves the repo root as-is. Pushing to `main` is the deploy.
-  Live site: https://ishara-madu.github.io/gemini-watermark-remover/
