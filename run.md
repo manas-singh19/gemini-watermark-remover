@@ -89,3 +89,13 @@ lsof -ti:8000 || echo "port 8000 is free"
   removal works fully offline.
 - **Video export requires WebCodecs** — use Chrome/Edge (or a recent Safari). Firefox support is limited.
 - **Deployment:** GitHub Pages serves the repo root as-is. Pushing to `main` is the deploy.
+
+## Deploy on Render
+
+This is a static site, so Render must publish the repository root. Use these settings
+when creating a **Static Site**:
+
+- **Build Command:** leave empty
+- **Publish Directory:** `.`
+
+The repository includes `render.yaml` with these settings for Blueprint deployments.

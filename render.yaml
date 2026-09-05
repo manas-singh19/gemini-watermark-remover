@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: gemini-watermark-remover
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false

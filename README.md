@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <a href="https://gemini-watermark-remover-ztxv.onrender.com">Open the live website</a>
+</p>
+
+<p align="center">
   <a href="https://github.com/manassingh"><img src="https://img.shields.io/badge/GitHub-manassingh-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
   <a href="https://linkedin.com/in/manassingh"><img src="https://img.shields.io/badge/LinkedIn-manassingh-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License" />

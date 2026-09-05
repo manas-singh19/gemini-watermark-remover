@@ -236,10 +236,19 @@ class VideoWatermarkEngine {
   }
 
   static isSupported() {
-    return (
+    const webCodecsSupported = (
       typeof VideoEncoder !== 'undefined' &&
       typeof VideoDecoder !== 'undefined'
     );
+    const mediaRecorderSupported = (
+      typeof MediaRecorder !== 'undefined' &&
+      typeof HTMLCanvasElement.prototype.captureStream === 'function'
+    );
+    return webCodecsSupported || mediaRecorderSupported;
+  }
+
+  static isSafari() {
+    return /Safari/.test(navigator.userAgent) && !/Chrome|CriOS|Android/.test(navigator.userAgent);
   }
 
   async _lib() {
@@ -272,7 +281,96 @@ class VideoWatermarkEngine {
     });
   }
 
+  async processWithMediaRecorder(file, opts = {}) {
+    if (typeof MediaRecorder === 'undefined' || typeof HTMLCanvasElement.prototype.captureStream !== 'function') {
+      throw new Error('Safari video recording is not available in this browser.');
+    }
+
+    const onProgress = opts.onProgress || (() => { });
+    const originalUrl = URL.createObjectURL(file);
+    const video = document.createElement('video');
+    video.src = originalUrl;
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+
+    await new Promise((resolve, reject) => {
+      video.onloadedmetadata = resolve;
+      video.onerror = () => reject(new Error('Could not read this video file in Safari.'));
+    });
+
+    const width = video.videoWidth;
+    const height = video.videoHeight;
+    const frameRate = 30;
+    const duration = Number.isFinite(video.duration) ? video.duration : 0;
+    const base = opts.mode === 'gemini' ? getWatermarkInfo(width, height) : this.getVeoWatermark(width, height);
+    const wm = resolveBox(base, width, height, opts);
+    const roi = getRoi(width, height, wm);
+    const alpha = buildAlpha(this.engine.bg96, roi, wm, opts.gain ?? VIDEO_DEFAULTS.gain);
+    const region = { x: 0, y: 0, width: roi.width, height: roi.height };
+    const canvas = Object.assign(document.createElement('canvas'), { width, height });
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    const inputStream = video.captureStream();
+    const outputStream = canvas.captureStream(frameRate);
+    inputStream.getAudioTracks().forEach((track) => outputStream.addTrack(track));
+
+    const mimeType = ['video/mp4;codecs="avc1.42E01E,mp4a.40.2"', 'video/mp4', 'video/webm'].find((type) => MediaRecorder.isTypeSupported(type));
+    if (!mimeType) throw new Error('Safari cannot record the processed video in a supported format.');
+
+    const recorder = new MediaRecorder(outputStream, { mimeType });
+    const chunks = [];
+    let frameTimer = null;
+    const recording = new Promise((resolve, reject) => {
+      recorder.ondataavailable = (event) => {
+        if (event.data.size) chunks.push(event.data);
+      };
+      recorder.onerror = () => reject(new Error('Safari could not encode the processed video.'));
+      recorder.onstop = () => resolve();
+    });
+
+    const drawFrame = () => {
+      ctx.drawImage(video, 0, 0, width, height);
+      const pixels = ctx.getImageData(roi.x, roi.y, roi.width, roi.height);
+      removeWatermark(pixels, alpha, region);
+      ctx.putImageData(pixels, roi.x, roi.y);
+      if (duration) onProgress({ progress: Math.min(0.99, video.currentTime / duration) });
+      if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(drawFrame);
+    };
+
+    recorder.start();
+    video.onended = () => {
+      if (frameTimer) clearInterval(frameTimer);
+      recorder.stop();
+    };
+    if (video.requestVideoFrameCallback) {
+      video.requestVideoFrameCallback(drawFrame);
+    } else {
+      frameTimer = setInterval(drawFrame, 1000 / frameRate);
+    }
+    await video.play();
+    await recording;
+
+    inputStream.getTracks().forEach((track) => track.stop());
+    outputStream.getTracks().forEach((track) => track.stop());
+    onProgress({ progress: 1 });
+
+    const blob = new Blob(chunks, { type: mimeType });
+    return {
+      blob,
+      url: URL.createObjectURL(blob),
+      originalUrl,
+      ext: mimeType.includes('webm') ? 'webm' : 'mp4',
+      mime: mimeType,
+      width,
+      height,
+    };
+  }
+
   async process(file, opts = {}) {
+    if (VideoWatermarkEngine.isSafari()) {
+      return this.processWithMediaRecorder(file, opts);
+    }
+
     const onProgress = opts.onProgress || (() => { });
     const gain = opts.gain ?? VIDEO_DEFAULTS.gain;
 
@@ -364,11 +462,7 @@ class VideoWatermarkEngine {
 
       const px = ctx.getImageData(roi.x, roi.y, roi.width, roi.height);
       removeWatermark(px, alpha, region);
-
-      // Force GPU texture sync for WebCodecs by using ImageBitmap
-      const bmp = await createImageBitmap(px);
-      ctx.drawImage(bmp, roi.x, roi.y);
-      bmp.close();
+      ctx.putImageData(px, roi.x, roi.y);
 
       await videoSource.add(timestamp, dur);
       if (duration) onProgress({ progress: Math.min(0.99, timestamp / duration) });
@@ -1769,22 +1863,29 @@ function initVideoRemover() {
     isProcessing = loading;
     if (loading) {
       dropzone.classList.add('loading');
-      dropzone.innerHTML = `
+      dropzone.querySelectorAll(':scope > :not(#video-input)').forEach((element) => element.remove());
+      const loader = document.createElement('div');
+      loader.className = 'dropzone-loader';
+      loader.innerHTML = `
         <div class="dropzone-loader">
           <div class="dropzone-spinner"></div>
           <p class="dropzone-title text-indigo-600">${message}</p>
           <p class="dropzone-sub">Scanning video frames & auto-detecting watermark...</p>
         </div>
       `;
+      dropzone.prepend(loader.firstElementChild);
     } else {
       dropzone.classList.remove('loading');
-      dropzone.innerHTML = `
+      dropzone.querySelectorAll(':scope > :not(#video-input)').forEach((element) => element.remove());
+      const content = document.createElement('div');
+      content.innerHTML = `
         <div class="dropzone-icon">
           <iconify-icon icon="ph:video-bold"></iconify-icon>
         </div>
         <p class="dropzone-title">Upload or drag a Gemini Veo 3 video</p>
         <p class="dropzone-sub">Supports MP4, WebM, MOV</p>
       `;
+      while (content.firstElementChild) dropzone.append(content.firstElementChild);
     }
   }
 
@@ -2090,6 +2191,11 @@ function initVideoRemover() {
   async function handleVideoFile(file) {
     if (!file.type.startsWith('video/')) return;
     if (isProcessing) return;
+
+    if (!VideoWatermarkEngine.isSupported()) {
+      alert('Video processing requires a browser with local video encoding support. Please use the latest Chrome, Edge, or Safari.');
+      return;
+    }
 
     setDropzoneLoading(true, 'Extracting Best Frame & Analyzing...');
     currentFile = file;
