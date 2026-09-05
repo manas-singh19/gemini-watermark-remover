@@ -268,20 +268,20 @@ a {
   height: 38px;
   width: 38px;
   font-weight: 600;
-  color: var(--ink-2);
-  border: 1px solid var(--line);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  background: var(--glass);
-  box-shadow: var(--specular);
+  background: var(--brand-red);
+  box-shadow: var(--specular), 0 8px 22px -10px var(--brand-red-glow);
   transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast),
     box-shadow var(--t-fast);
 }
 
 .btn-icon:hover {
   color: #fff;
-  border-color: var(--brand-red-hover);
-  background: var(--brand-red);
-  box-shadow: var(--specular), 0 8px 22px -8px var(--brand-red-glow);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--brand-red-hover);
+  box-shadow: var(--specular), 0 12px 30px -8px var(--brand-red-glow);
 }
 
 .btn-icon-label {
@@ -297,11 +297,11 @@ a {
   justify-content: center;
   height: 38px;
   width: 38px;
-  color: var(--ink);
-  background: var(--glass);
-  border: 1px solid var(--line);
+  color: #fff;
+  background: var(--brand-red);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  box-shadow: var(--specular);
+  box-shadow: var(--specular), 0 8px 22px -10px var(--brand-red-glow);
   cursor: pointer;
   transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
@@ -309,8 +309,8 @@ a {
 .mobile-menu-toggle:hover,
 .mobile-menu-toggle.active {
   color: #fff;
-  background: var(--brand-red);
-  border-color: var(--brand-red-hover);
+  background: var(--brand-red-hover);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .mobile-nav-links {
