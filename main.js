@@ -1189,11 +1189,11 @@ function initImageRemover() {
     if (currentDetected) {
       if (currentDetected.matchFound) {
         badgeEl.className = 'detect-badge';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #6366f1;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #8b93ff;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
         badgeEl.classList.remove('hidden');
       } else {
         badgeEl.className = 'detect-badge warning';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:info" width="16" style="color: #d97706;"></iconify-icon> <span>Standard Preset Applied (${currentDetected.name})</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:info" width="16" style="color: #fbbf24;"></iconify-icon> <span>Standard Preset Applied (${currentDetected.name})</span>`;
         badgeEl.classList.remove('hidden');
       }
     } else {
@@ -1902,11 +1902,11 @@ function initVideoRemover() {
     if (currentDetected) {
       if (currentDetected.matchFound) {
         badgeEl.className = 'detect-badge';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #6366f1;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #8b93ff;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
         badgeEl.classList.remove('hidden');
       } else {
         badgeEl.className = 'detect-badge warning';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:info" width="16" style="color: #d97706;"></iconify-icon> <span>Standard Preset Applied (${currentDetected.name})</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:info" width="16" style="color: #fbbf24;"></iconify-icon> <span>Standard Preset Applied (${currentDetected.name})</span>`;
         badgeEl.classList.remove('hidden');
       }
     } else {
