@@ -1189,7 +1189,7 @@ function initImageRemover() {
     if (currentDetected) {
       if (currentDetected.matchFound) {
         badgeEl.className = 'detect-badge';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #8b93ff;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #ff6b5e;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
         badgeEl.classList.remove('hidden');
       } else {
         badgeEl.className = 'detect-badge warning';
@@ -1296,7 +1296,7 @@ function initImageRemover() {
     mainCanvas.height = Math.round(height * scale);
     const mctx = mainCanvas.getContext('2d');
     mctx.drawImage(offscreen, 0, 0, mainCanvas.width, mainCanvas.height);
-    mctx.strokeStyle = '#6366f1';
+    mctx.strokeStyle = '#ff6b5e';
     mctx.lineWidth = 2;
     mctx.strokeRect(wm.x * scale, wm.y * scale, wm.width * scale, wm.height * scale);
 
@@ -1902,7 +1902,7 @@ function initVideoRemover() {
     if (currentDetected) {
       if (currentDetected.matchFound) {
         badgeEl.className = 'detect-badge';
-        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #8b93ff;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
+        badgeEl.innerHTML = `<iconify-icon icon="ph:scan" width="16" style="color: #ff6b5e;"></iconify-icon> <span>Auto-Detected: <strong>${currentDetected.name}</strong> (${Math.round(currentDetected.score * 100)}% match)</span>`;
         badgeEl.classList.remove('hidden');
       } else {
         badgeEl.className = 'detect-badge warning';
@@ -2159,7 +2159,7 @@ function initVideoRemover() {
     mainCanvas.height = Math.round(height * scale);
     const mctx = mainCanvas.getContext('2d');
     mctx.drawImage(offscreen, 0, 0, mainCanvas.width, mainCanvas.height);
-    mctx.strokeStyle = '#6366f1';
+    mctx.strokeStyle = '#ff6b5e';
     mctx.lineWidth = 2;
     mctx.strokeRect(wm.x * scale, wm.y * scale, wm.width * scale, wm.height * scale);
 

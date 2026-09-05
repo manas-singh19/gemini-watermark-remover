@@ -31,25 +31,20 @@
   --ink-2: #a6a6b0;
   --ink-3: #71717d;
 
-  /* Accent */
-  --accent: #8b93ff;
-  --accent-hover: #a5abff;
-  --accent-solid: #5b5bd6;
-  --accent-solid-hover: #6d6ce6;
-  --accent-wash: rgba(99, 102, 241, 0.14);
-  --accent-glow: rgba(99, 102, 241, 0.35);
+  /* Accent — red. Change these six and the whole site follows. */
+  --accent: #ff6b5e;              /* bright red: text + icons on black (7.5:1) */
+  --accent-hover: #ff9080;
+  --accent-solid: #d92d20;        /* solid fills with white text */
+  --accent-solid-hover: #f04438;
+  --accent-wash: rgba(217, 45, 32, 0.15);
+  --accent-glow: rgba(217, 45, 32, 0.42);
 
   /* Status */
   --ok: #3ddc97;
   --ok-wash: rgba(61, 220, 151, 0.12);
   --warn: #fbbf24;
-  --danger: #ff6b6b;
-  --danger-wash: rgba(255, 107, 107, 0.12);
-
-  /* Header accent — matched to the reference crimson */
-  --brand-red: #d92d20;
-  --brand-red-hover: #f04438;
-  --brand-red-glow: rgba(217, 45, 32, 0.45);
+  --danger: #ff4d79;              /* rose, so errors stay distinct from the red accent */
+  --danger-wash: rgba(255, 77, 121, 0.13);
 
   /* Geometry */
   --r-xs: 6px;
@@ -94,9 +89,9 @@ body {
   /* Ambient aurora — gives the glass something to refract */
   background-color: var(--bg);
   background-image:
-    radial-gradient(900px 520px at 10% -10%, rgba(99, 102, 241, 0.18), transparent 62%),
-    radial-gradient(780px 440px at 90% 0%, rgba(168, 85, 247, 0.13), transparent 64%),
-    radial-gradient(760px 520px at 50% 106%, rgba(56, 189, 248, 0.08), transparent 62%);
+    radial-gradient(900px 520px at 10% -10%, rgba(217, 45, 32, 0.20), transparent 62%),
+    radial-gradient(780px 440px at 90% 0%, rgba(255, 71, 120, 0.13), transparent 64%),
+    radial-gradient(760px 520px at 50% 106%, rgba(255, 138, 60, 0.09), transparent 62%);
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
@@ -271,8 +266,8 @@ a {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  background: var(--brand-red);
-  box-shadow: var(--specular), 0 8px 22px -10px var(--brand-red-glow);
+  background: var(--accent-solid);
+  box-shadow: var(--specular), 0 8px 22px -10px var(--accent-glow);
   transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast),
     box-shadow var(--t-fast);
 }
@@ -280,8 +275,8 @@ a {
 .btn-icon:hover {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.3);
-  background: var(--brand-red-hover);
-  box-shadow: var(--specular), 0 12px 30px -8px var(--brand-red-glow);
+  background: var(--accent-solid-hover);
+  box-shadow: var(--specular), 0 12px 30px -8px var(--accent-glow);
 }
 
 .btn-icon-label {
@@ -298,10 +293,10 @@ a {
   height: 38px;
   width: 38px;
   color: #fff;
-  background: var(--brand-red);
+  background: var(--accent-solid);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  box-shadow: var(--specular), 0 8px 22px -10px var(--brand-red-glow);
+  box-shadow: var(--specular), 0 8px 22px -10px var(--accent-glow);
   cursor: pointer;
   transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
 }
@@ -309,7 +304,7 @@ a {
 .mobile-menu-toggle:hover,
 .mobile-menu-toggle.active {
   color: #fff;
-  background: var(--brand-red-hover);
+  background: var(--accent-solid-hover);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -368,7 +363,7 @@ a {
 }
 
 .hero-title-accent {
-  background: linear-gradient(120deg, #8b93ff 0%, #c4a2ff 50%, #7dd3fc 100%);
+  background: linear-gradient(120deg, #ff6b5e 0%, #ff8a6b 50%, #ffc48a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -774,7 +769,7 @@ input[type='range']::-webkit-slider-thumb {
   background: #ffffff;
   border: 2px solid var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.16), 0 2px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.18), 0 2px 6px rgba(0, 0, 0, 0.6);
   transition: transform var(--t-fast);
 }
 
@@ -788,7 +783,7 @@ input[type='range']::-moz-range-thumb {
   background: #ffffff;
   border: 2px solid var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.16);
+  box-shadow: 0 0 0 4px rgba(217, 45, 32, 0.18);
 }
 
 /* ── Buttons ────────────────────────────────────────────────────────────── */
@@ -821,13 +816,13 @@ input[type='range']::-moz-range-thumb {
 
 .btn-primary {
   color: #fff;
-  background: linear-gradient(180deg, #6d6ce6, #4f46e5);
+  background: linear-gradient(180deg, #e8402f, #d92d20);
   border-color: rgba(255, 255, 255, 0.14);
   box-shadow: var(--specular), 0 8px 24px -10px var(--accent-glow);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #7f7ef0, #5b52ee);
+  background: linear-gradient(180deg, #f4574a, #e5342a);
   box-shadow: var(--specular), 0 12px 30px -10px var(--accent-glow);
 }
 
@@ -865,7 +860,7 @@ input[type='range']::-moz-range-thumb {
 .progress-bar-fill {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg, #6d6ce6, #8b93ff);
+  background: linear-gradient(90deg, #d92d20, #ff6b5e);
   border-radius: 999px;
   box-shadow: 0 0 14px var(--accent-glow);
   transition: width 0.3s ease;
@@ -994,7 +989,7 @@ input[type='range']::-moz-range-thumb {
 }
 
 .batch-item-status.working {
-  color: var(--accent);
+  color: var(--ink-2);
 }
 
 .batch-item-status.working iconify-icon {
@@ -1121,7 +1116,7 @@ input[type='range']::-moz-range-thumb {
   margin-bottom: 1.25rem;
   color: var(--accent);
   background: var(--accent-wash);
-  border: 1px solid rgba(139, 147, 255, 0.22);
+  border: 1px solid rgba(255, 107, 94, 0.22);
   border-radius: var(--r-md);
 }
 
@@ -1365,7 +1360,7 @@ input[type='range']::-moz-range-thumb {
   font-size: 0.86em;
   color: var(--accent);
   background: var(--accent-wash);
-  border: 1px solid rgba(139, 147, 255, 0.2);
+  border: 1px solid rgba(255, 107, 94, 0.2);
   border-radius: var(--r-xs);
 }
 
